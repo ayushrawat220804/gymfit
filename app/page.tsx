@@ -47,7 +47,7 @@ export default function Home() {
               {/* Stats */}
               <div className="mt-12 grid grid-cols-3 gap-6 pt-8 border-t border-gray-700/50">
                 <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-                  <div className="text-4xl font-bold text-primary-400 mb-2">5+</div>
+                  <div className="text-4xl font-bold text-primary-400 mb-2">4+</div>
                   <div className="text-sm text-gray-400 font-medium">Years Experience</div>
                 </div>
                 <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">

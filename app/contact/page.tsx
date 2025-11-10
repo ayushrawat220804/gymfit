@@ -204,16 +204,7 @@ export default function Contact() {
             </form>
           )}
 
-          {/* Alternative CTA */}
-          <div className="mt-12 text-center">
-            <p className="text-gray-700 mb-4">Prefer to talk first?</p>
-            <a
-              href="mailto:asim@gymfit.com"
-              className="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition"
-            >
-              Book a Free Call
-            </a>
-          </div>
+          {/* Alternative CTA removed as per request */}
         </div>
       </section>
     </div>
