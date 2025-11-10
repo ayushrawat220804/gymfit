@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 export default function Tools() {
   const [bmiData, setBmiData] = useState({
+    gender: 'male',
     height: '',
     weight: '',
     bmi: null as number | null,
@@ -107,6 +108,21 @@ export default function Tools() {
             <div className="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-lg">
               <h2 className="text-3xl font-bold mb-6 text-gray-900">BMI Calculator</h2>
               <form onSubmit={calculateBMI} className="space-y-4">
+                <div>
+                  <label htmlFor="bmi-gender" className="block text-sm font-medium text-gray-700 mb-2">
+                    Gender
+                  </label>
+                  <select
+                    id="bmi-gender"
+                    required
+                    value={bmiData.gender}
+                    onChange={(e) => setBmiData({ ...bmiData, gender: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
                 <div>
                   <label htmlFor="bmi-height" className="block text-sm font-medium text-gray-700 mb-2">
                     Height (cm)
