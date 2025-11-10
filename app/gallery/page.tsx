@@ -52,12 +52,21 @@ const photos: Photo[] = [
   },
   {
     id: 5,
-    src: '/images/image-5.jpg',
+    src: '/images/image-6.jpg',
+    alt: 'Asim Negi transformation - Month 15',
+    date: 'Month 15',
+    weight: '175 lbs',
+    bmi: '24.9',
+    milestone: 'Maintained and improved'
+  },
+  {
+    id: 6,
+    src: '/images/image-6-current.jpg',
     alt: 'Asim Negi current physique',
     date: 'Current',
     weight: '175 lbs',
     bmi: '24.9',
-    milestone: 'Maintained and improved'
+    milestone: 'Latest transformation'
   }
 ]
 
