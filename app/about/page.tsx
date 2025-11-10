@@ -39,7 +39,7 @@ export default function About() {
                 built both my physique and my knowledge.
               </p>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Over the years, I've helped over 100 people transform their bodies using the same principles that 
+                Over the years, I've helped over 10 people transform their bodies using the same principles that 
                 worked for me. The key? Keeping it simple, evidence-based, and sustainable.
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function About() {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-gray-900">Credentials & Experience</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                With over 5 years of hands-on training experience, I've studied under various coaches, completed 
+                With over 4 years of hands-on training experience, I've studied under various coaches, completed 
                 multiple certifications in strength training and nutrition, and most importantly, I've tested 
                 everything I teach on myself first.
               </p>
