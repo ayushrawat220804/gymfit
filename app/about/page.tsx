@@ -56,19 +56,19 @@ export default function About() {
               <h2 className="text-3xl font-bold mb-6 text-gray-900">Current Stats & Milestones</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-primary-600 mb-2">5'10"</div>
+                  <div className="text-2xl font-bold text-primary-600 mb-2">5'7"</div>
                   <div className="text-sm text-gray-600">Height</div>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-primary-600 mb-2">175 lbs</div>
+                  <div className="text-2xl font-bold text-primary-600 mb-2">155lbs</div>
                   <div className="text-sm text-gray-600">Current Weight</div>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-primary-600 mb-2">5+ Years</div>
+                  <div className="text-2xl font-bold text-primary-600 mb-2">4+ Years</div>
                   <div className="text-sm text-gray-600">Training Experience</div>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-primary-600 mb-2">100+</div>
+                  <div className="text-2xl font-bold text-primary-600 mb-2">10+</div>
                   <div className="text-sm text-gray-600">Clients Transformed</div>
                 </div>
               </div>
