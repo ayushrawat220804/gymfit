@@ -45,17 +45,17 @@ export default function Home() {
               </div>
               
               {/* Stats */}
-              <div className="mt-12 grid grid-cols-3 gap-6 pt-8 border-t border-gray-700/50">
-                <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-                  <div className="text-4xl font-bold text-primary-400 mb-2">4+</div>
+              <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 pt-8 border-t border-gray-700/50">
+                <div className="text-center p-3 sm:p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-primary-400 mb-1 sm:mb-2">4+</div>
                   <div className="text-sm text-gray-400 font-medium">Years Experience</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-                  <div className="text-4xl font-bold text-primary-400 mb-2">100+</div>
+                <div className="text-center p-3 sm:p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-primary-400 mb-1 sm:mb-2">10+</div>
                   <div className="text-sm text-gray-400 font-medium">Transformations</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-                  <div className="text-4xl font-bold text-primary-400 mb-2">3</div>
+                <div className="text-center p-3 sm:p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                  <div className="text-3xl sm:text-4xl font-bold text-primary-400 mb-1 sm:mb-2">3</div>
                   <div className="text-sm text-gray-400 font-medium">Program Types</div>
                 </div>
               </div>
@@ -74,8 +74,8 @@ export default function Home() {
                   priority
                 />
                 <div className="absolute bottom-6 left-6 right-6 z-20 text-white">
-                  <div className="bg-black/40 backdrop-blur-md rounded-xl p-4 border border-white/10">
-                    <p className="text-sm font-medium text-gray-200">Real Results • Real People • Real Transformation</p>
+                  <div className="bg-black/40 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-white/10">
+                    <p className="text-xs sm:text-sm font-medium text-gray-200">Real Results • Real People • Real Transformation</p>
                   </div>
                 </div>
               </div>
