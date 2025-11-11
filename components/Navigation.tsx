@@ -1,10 +1,22 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -62,31 +74,46 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation (Overlay) */}
       {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-            <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
+        <div className="md:hidden fixed inset-0 z-[60]">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setIsOpen(false)}></div>
+          <div className="absolute top-0 left-0 right-0 mx-auto max-w-md bg-white rounded-b-2xl shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-4 border-b">
+              <span className="text-2xl font-bold text-primary-600">GymFit</span>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-gray-700 hover:text-primary-600 p-2"
+                aria-label="Close menu"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+              <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
               Home
             </Link>
-            <Link href="/about" className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
+            <Link href="/about" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
               About
             </Link>
-            <Link href="/programs" className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
+            <Link href="/programs" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
               Programs
             </Link>
-            <Link href="/diet" className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
+            <Link href="/diet" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
               Diet & Nutrition
             </Link>
-            <Link href="/tools" className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
+            <Link href="/tools" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
               Calculators
             </Link>
-            <Link href="/gallery" className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
+            <Link href="/gallery" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-gray-700 hover:text-primary-600 rounded-md text-base font-medium">
               Gallery
             </Link>
-            <Link href="/contact" className="block px-3 py-2 bg-primary-600 text-white rounded-md text-base font-medium">
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 bg-primary-600 text-white rounded-md text-base font-medium">
               Get Free Plan
             </Link>
+            </div>
           </div>
         </div>
       )}
