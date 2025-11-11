@@ -6,7 +6,11 @@ export default function Tools() {
   const [bmiData, setBmiData] = useState({
     gender: 'male',
     height: '',
+    heightFeet: '',
+    heightInches: '',
+    heightUnit: 'cm',
     weight: '',
+    weightUnit: 'kg',
     bmi: null as number | null,
     category: ''
   })
@@ -15,7 +19,11 @@ export default function Tools() {
     age: '',
     gender: 'male',
     height: '',
+    heightFeet: '',
+    heightInches: '',
+    heightUnit: 'cm',
     weight: '',
+    weightUnit: 'kg',
     activity: '1.2',
     bmr: null as number | null,
     tdee: null as number | null,
@@ -30,8 +38,23 @@ export default function Tools() {
 
   const calculateBMI = (e: React.FormEvent) => {
     e.preventDefault()
-    const heightInMeters = parseFloat(bmiData.height) / 100
-    const weightInKg = parseFloat(bmiData.weight)
+    let heightInMeters = 0
+    if (bmiData.heightUnit === 'cm') {
+      heightInMeters = parseFloat(bmiData.height || '0') / 100
+    } else {
+      const feet = parseFloat(bmiData.heightFeet || '0')
+      const inches = parseFloat(bmiData.heightInches || '0')
+      const totalInches = feet * 12 + inches
+      heightInMeters = (totalInches * 2.54) / 100
+    }
+
+    let weightInKg = 0
+    if (bmiData.weightUnit === 'kg') {
+      weightInKg = parseFloat(bmiData.weight || '0')
+    } else {
+      const pounds = parseFloat(bmiData.weight || '0')
+      weightInKg = pounds / 2.20462
+    }
     
     if (heightInMeters > 0 && weightInKg > 0) {
       const bmi = weightInKg / (heightInMeters * heightInMeters)
@@ -49,8 +72,24 @@ export default function Tools() {
   const calculateBMR = (e: React.FormEvent) => {
     e.preventDefault()
     const age = parseFloat(bmrData.age)
-    const heightInCm = parseFloat(bmrData.height)
-    const weightInKg = parseFloat(bmrData.weight)
+
+    let heightInCm = 0
+    if (bmrData.heightUnit === 'cm') {
+      heightInCm = parseFloat(bmrData.height || '0')
+    } else {
+      const feet = parseFloat(bmrData.heightFeet || '0')
+      const inches = parseFloat(bmrData.heightInches || '0')
+      const totalInches = feet * 12 + inches
+      heightInCm = totalInches * 2.54
+    }
+
+    let weightInKg = 0
+    if (bmrData.weightUnit === 'kg') {
+      weightInKg = parseFloat(bmrData.weight || '0')
+    } else {
+      const pounds = parseFloat(bmrData.weight || '0')
+      weightInKg = pounds / 2.20462
+    }
     const activity = parseFloat(bmrData.activity)
     
     if (age > 0 && heightInCm > 0 && weightInKg > 0) {
@@ -124,23 +163,73 @@ export default function Tools() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="bmi-height" className="block text-sm font-medium text-gray-700 mb-2">
-                    Height (cm)
-                  </label>
-                  <input
-                    type="number"
-                    id="bmi-height"
-                    required
-                    value={bmiData.height}
-                    onChange={(e) => setBmiData({ ...bmiData, height: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
-                    placeholder="175"
-                  />
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Height
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-600">Unit:</span>
+                      <select
+                        value={bmiData.heightUnit}
+                        onChange={(e) => setBmiData({ ...bmiData, heightUnit: e.target.value, height: '', heightFeet: '', heightInches: '' })}
+                        className="px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                      >
+                        <option value="cm">cm</option>
+                        <option value="ftin">ft + in</option>
+                      </select>
+                    </div>
+                  </div>
+                  {bmiData.heightUnit === 'cm' ? (
+                    <input
+                      type="number"
+                      id="bmi-height"
+                      required
+                      value={bmiData.height}
+                      onChange={(e) => setBmiData({ ...bmiData, height: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                      placeholder="175"
+                    />
+                  ) : (
+                    <div className="grid grid-cols-2 gap-3">
+                      <input
+                        type="number"
+                        id="bmi-height-feet"
+                        required
+                        value={bmiData.heightFeet}
+                        onChange={(e) => setBmiData({ ...bmiData, heightFeet: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                        placeholder="5 (ft)"
+                      />
+                      <input
+                        type="number"
+                        id="bmi-height-inches"
+                        required
+                        value={bmiData.heightInches}
+                        onChange={(e) => setBmiData({ ...bmiData, heightInches: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                        placeholder="8 (in)"
+                        step="0.1"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="bmi-weight" className="block text-sm font-medium text-gray-700 mb-2">
-                    Weight (kg)
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Weight
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-600">Unit:</span>
+                      <select
+                        value={bmiData.weightUnit}
+                        onChange={(e) => setBmiData({ ...bmiData, weightUnit: e.target.value, weight: '' })}
+                        className="px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                      >
+                        <option value="kg">kg</option>
+                        <option value="lb">lb</option>
+                      </select>
+                    </div>
+                  </div>
                   <input
                     type="number"
                     id="bmi-weight"
@@ -148,7 +237,8 @@ export default function Tools() {
                     value={bmiData.weight}
                     onChange={(e) => setBmiData({ ...bmiData, weight: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
-                    placeholder="75"
+                    placeholder={bmiData.weightUnit === 'kg' ? '75' : '165'}
+                    step="0.1"
                   />
                 </div>
                 <button
@@ -216,23 +306,73 @@ export default function Tools() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="bmr-height" className="block text-sm font-medium text-gray-700 mb-2">
-                    Height (cm)
-                  </label>
-                  <input
-                    type="number"
-                    id="bmr-height"
-                    required
-                    value={bmrData.height}
-                    onChange={(e) => setBmrData({ ...bmrData, height: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
-                    placeholder="175"
-                  />
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Height
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-600">Unit:</span>
+                      <select
+                        value={bmrData.heightUnit}
+                        onChange={(e) => setBmrData({ ...bmrData, heightUnit: e.target.value, height: '', heightFeet: '', heightInches: '' })}
+                        className="px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                      >
+                        <option value="cm">cm</option>
+                        <option value="ftin">ft + in</option>
+                      </select>
+                    </div>
+                  </div>
+                  {bmrData.heightUnit === 'cm' ? (
+                    <input
+                      type="number"
+                      id="bmr-height"
+                      required
+                      value={bmrData.height}
+                      onChange={(e) => setBmrData({ ...bmrData, height: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                      placeholder="175"
+                    />
+                  ) : (
+                    <div className="grid grid-cols-2 gap-3">
+                      <input
+                        type="number"
+                        id="bmr-height-feet"
+                        required
+                        value={bmrData.heightFeet}
+                        onChange={(e) => setBmrData({ ...bmrData, heightFeet: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                        placeholder="5 (ft)"
+                      />
+                      <input
+                        type="number"
+                        id="bmr-height-inches"
+                        required
+                        value={bmrData.heightInches}
+                        onChange={(e) => setBmrData({ ...bmrData, heightInches: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                        placeholder="8 (in)"
+                        step="0.1"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="bmr-weight" className="block text-sm font-medium text-gray-700 mb-2">
-                    Weight (kg)
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Weight
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-600">Unit:</span>
+                      <select
+                        value={bmrData.weightUnit}
+                        onChange={(e) => setBmrData({ ...bmrData, weightUnit: e.target.value, weight: '' })}
+                        className="px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-600 focus:border-transparent"
+                      >
+                        <option value="kg">kg</option>
+                        <option value="lb">lb</option>
+                      </select>
+                    </div>
+                  </div>
                   <input
                     type="number"
                     id="bmr-weight"
@@ -240,7 +380,8 @@ export default function Tools() {
                     value={bmrData.weight}
                     onChange={(e) => setBmrData({ ...bmrData, weight: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-600 focus:border-transparent"
-                    placeholder="75"
+                    placeholder={bmrData.weightUnit === 'kg' ? '75' : '165'}
+                    step="0.1"
                   />
                 </div>
                 <div>
